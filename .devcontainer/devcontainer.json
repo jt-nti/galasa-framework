@@ -1,0 +1,37 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
+{
+	"name": "Java",
+	
+	"build": {
+		// More info: https://containers.dev/guide/dockerfile
+        "dockerfile": "Dockerfile"
+    },
+
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "false",
+			"installGradle": "true"
+		},
+		"ghcr.io/devcontainers-contrib/features/etcd:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	"postStartCommand": {
+		"couchdb": "/opt/couchdb/bin/couchdb",
+		"etcd": "/usr/local/bin/etcd --data-dir /var/default.etcd",
+		"dex": "/usr/local/bin/dex serve /etc/dex/config.dev.yaml"
+	}
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
